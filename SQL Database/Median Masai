@@ -1,0 +1,10 @@
+SELECT DISTINCT
+ Scheme_Name_Area,
+ COUNT(Transaction_Price) OVER (PARTITION BY Scheme_Name_Area) AS total_count,
+ MIN(Transaction_Price) OVER (PARTITION BY Scheme_Name_Area) AS min_Transaction_Price,
+ MAX(Transaction_Price) OVER (PARTITION BY Scheme_Name_Area) AS max_Transaction_Price,
+ PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY Transaction_Price) 
+ OVER (PARTITION BY Scheme_Name_Area) AS median_Transaction_Price,
+ STDEV(Transaction_Price) OVER (PARTITION BY Scheme_Name_Area) AS std_dev
+FROM JB_Transacted_Property
+WHERE Scheme_Name_Area LIKE '%MASAI%';

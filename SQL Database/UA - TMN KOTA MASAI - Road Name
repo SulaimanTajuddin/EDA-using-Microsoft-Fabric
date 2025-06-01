@@ -1,0 +1,8 @@
+SELECT Road_Name,
+CASE
+    WHEN Transaction_Price <= 250000 THEN 'Low-Cost'
+    WHEN Transaction_Price <= 350000 THEN 'Medium-Cost'
+    ELSE 'High-Cost'
+END AS status
+FROM JB_Transacted_Property
+WHERE Scheme_Name_Area = 'TMN KOTA MASAI' AND ((Road_Name LIKE 'JLN PULASAN __') OR (Road_Name LIKE 'JLN PULASAN _'))
